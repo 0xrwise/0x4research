@@ -4,12 +4,6 @@
   <img src="https://i.ibb.co.com/XkxnDfMv/0x4research-Terminal-UI-Collage.png" width="100%" alt="0x4research Preview">
 </p>
 
-
-Copied from: Editing 0x4research/README.md at main · 0xrwise/0x4research - <https://github.com/0xrwise/0x4research/edit/main/README.md>
-
-
-Copied from: Editing 0x4research/README.md at main · 0xrwise/0x4research - <https://github.com/0xrwise/0x4research/edit/main/README.md>
-
 **0x4research** adalah template website statis berbasis **Jekyll** dengan konsep *Unix Terminal* murni untuk arsip penelitian pribadi (*personal research archive*) dan blog catatan teknis. Seluruh konfigurasi identitas, perintah terminal, serta halaman CV dengan efek ketikan otomatis (*typewriter effect*) dipusatkan di dalam satu file **`_config.yml`**.
 
 ## Fitur Utama
