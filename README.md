@@ -1,7 +1,7 @@
 # 0x4research — Minimalist Terminal Research Archive & Personal Blog (Jekyll Theme)
 
 <p align="center">
-  <img src="https://i.ibb.co.com/XkxnDfMv/0x4research-Terminal-UI-Collage.png" width="100%" alt="0x4research Preview">
+  <img src="https://i.ibb.co.com/XkxnDfMv/0x4research-Terminal-UI-Collage.png" width=" alt="0x4research Preview">
 </p>
 
 **0x4research** adalah template website statis berbasis **Jekyll** dengan konsep *Unix Terminal* murni untuk arsip penelitian pribadi (*personal research archive*) dan blog catatan teknis. Seluruh konfigurasi identitas, perintah terminal, serta halaman CV dengan efek ketikan otomatis (*typewriter effect*) dipusatkan di dalam satu file **`_config.yml`**.
