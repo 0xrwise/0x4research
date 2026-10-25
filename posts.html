@@ -1,0 +1,40 @@
+---
+layout: default
+permalink: /posts/
+title: Posts
+---
+{% assign term_user = site.terminal.username | default: "user" %}
+{% assign term_host = site.terminal.hostname | default: "0x4research" %}
+
+<div class="terminal-content-text">
+    <div class="output-line output-cmd-header">
+        <span class="prompt"><span class="c-red">{{ term_user }}</span><span class="c-white">@{{ term_host }}:~$</span></span>
+        <span class="c-white">cd ~/posts &amp;&amp; ls</span>
+    </div>
+
+    <div class="output-line post-list">
+        {% if site.posts.size > 0 %}
+            {% for post in site.posts %}
+            <div class="post-item">
+                <span class="c-green">[{{ post.date | date: "%Y-%m-%d" }}]</span>
+                <a href="{{ post.url | relative_url }}" class="post-link">{{ post.title }}</a>
+            </div>
+            {% endfor %}
+        {% else %}
+            <!-- Placeholder entries rendered only when _posts/ directory is empty -->
+            <div class="post-item">
+                <span class="c-green">[2026-01-01]</span>
+                <a href="#" class="post-link">sample-research-note-01.md (Create posts inside _posts/)</a>
+            </div>
+            <div class="post-item">
+                <span class="c-green">[2026-01-01]</span>
+                <a href="#" class="post-link">getting-started-with-0x4research.md</a>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="output-line output-cursor-line">
+        <span class="prompt"><span class="c-red">{{ term_user }}</span><span class="c-white">@{{ term_host }}:~/posts$</span></span>
+        <span class="blinking-cursor"></span>
+    </div>
+</div>

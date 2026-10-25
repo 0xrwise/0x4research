@@ -1,0 +1,140 @@
+---
+layout: default
+permalink: /cv/
+title: CV
+---
+{% assign term_user = site.terminal.username | default: "user" %}
+{% assign term_host = site.terminal.hostname | default: "0x4research" %}
+{% assign cv = site.cv %}
+
+<div class="terminal-content-text cv-wrapper"
+     id="cv-root"
+     data-cmd="{{ cv.command | default: 'cat ~/cv.txt' | escape }}"
+     data-speed="{{ cv.typewriter_speed | default: 18 }}">
+
+    <!-- Baris perintah terminal dasar (diketik otomatis saat halaman dibuka) -->
+    <div class="output-line cv-cmd-line">
+        <span class="prompt"><span class="c-red">{{ term_user }}</span><span class="c-white">@{{ term_host }}:~$</span></span>
+        <span class="c-white" id="cv-typed-cmd"></span><span class="blinking-cursor" id="cv-cmd-cursor"></span>
+    </div>
+
+    <!-- Kontainer utama CV (muncul setelah perintah selesai diketik) -->
+    <div class="cv-body is-hidden" id="cv-body-content">
+
+        <!-- Bagian Atas: Teks Typewriter + Metadata di Kiri, Bingkai Foto di Kanan -->
+        <section class="cv-hero-split">
+            <div class="cv-intro-col">
+                <header class="cv-identity-head">
+                    <h1 class="cv-name">{{ cv.full_name | default: "[YOUR FULL NAME]" }}</h1>
+                    <div class="cv-subhead">
+                        <span class="c-green">{{ cv.role | default: "[YOUR ROLE / TITLE]" }}</span>
+                        {% if cv.location and cv.location != "" %}
+                        <span class="cv-sep">//</span>
+                        <span class="c-muted"><i class="fa-solid fa-location-dot"></i> {{ cv.location }}</span>
+                        {% endif %}
+                    </div>
+                </header>
+
+                <!-- Area Teks yang Mengetik Otomatis (gaya rataalada.com) -->
+                <div class="cv-typewriter-box">
+                    <div id="cv-typewriter-output" class="cv-typewriter-text"></div>
+                    <span class="blinking-cursor" id="cv-bio-cursor"></span>
+                </div>
+
+                <!-- Data Ringkas Key-Value -->
+                {% if cv.metadata and cv.metadata.size > 0 %}
+                <div class="cv-kv-list cv-fade-section">
+                    {% for item in cv.metadata %}
+                    <div class="cv-kv-row">
+                        <span class="cv-key c-blue">{{ item.key }}</span>
+                        <span class="cv-colon">:</span>
+                        <span class="cv-val {{ item.color }}">{{ item.value }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Bingkai Foto di Samping -->
+            <aside class="cv-photo-col">
+                <div class="cv-photo-card">
+                    <div class="cv-photo-bar">
+                        <span class="c-muted">{{ cv.photo_caption | default: "profile.jpg" }}</span>
+                    </div>
+                    <div class="cv-photo-frame">
+                        {% if cv.photo and cv.photo != "" %}
+                            <img src="{{ cv.photo | relative_url }}" alt="{{ cv.full_name | default: 'Profile Photo' }}">
+                        {% else %}
+                            <div class="cv-photo-placeholder">
+                                <i class="fa-regular fa-user" aria-hidden="true"></i>
+                                <span>[NO_IMAGE]</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </aside>
+        </section>
+
+        <!-- Bagian Riwayat / Penelitian / Pendidikan -->
+        {% if cv.timeline and cv.timeline.size > 0 %}
+        <section class="cv-section cv-fade-section">
+            <h2 class="cv-section-title"><span class="c-green">#</span> log --experience-and-research</h2>
+            <div class="cv-timeline">
+                {% for entry in cv.timeline %}
+                <div class="cv-timeline-item">
+                    <div class="cv-time-head">
+                        <span class="cv-period c-green">[{{ entry.period }}]</span>
+                        <span class="cv-entry-title c-white">{{ entry.title }}</span>
+                        {% if entry.org and entry.org != "" %}
+                        <span class="cv-entry-org c-blue">@ {{ entry.org }}</span>
+                        {% endif %}
+                    </div>
+                    {% if entry.description and entry.description != "" %}
+                    <p class="cv-entry-desc">{{ entry.description }}</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Bagian Topik Riset / Keahlian -->
+        {% if cv.skills and cv.skills.size > 0 %}
+        <section class="cv-section cv-fade-section">
+            <h2 class="cv-section-title"><span class="c-green">#</span> ls ~/topics-and-tools</h2>
+            <div class="cv-tags">
+                {% for skill in cv.skills %}
+                <span class="cv-tag">{{ skill }}</span>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Bagian Tautan & Kontak -->
+        {% if cv.links and cv.links.size > 0 %}
+        <section class="cv-section cv-fade-section">
+            <h2 class="cv-section-title"><span class="c-green">#</span> cat ~/.contact</h2>
+            <div class="cv-links-grid">
+                {% for link in cv.links %}
+                <div class="cv-kv-row">
+                    <span class="cv-key c-blue">{{ link.label }}</span>
+                    <span class="cv-colon">:</span>
+                    <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" class="comm-link">{{ link.text }}</a>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Prompt Penutup -->
+        <div class="output-line cv-footer-prompt cv-fade-section">
+            <span class="prompt"><span class="c-red">{{ term_user }}</span><span class="c-white">@{{ term_host }}:~$</span></span>
+            <span class="blinking-cursor"></span>
+        </div>
+    </div>
+
+    <!-- Data paragraf untuk efek mengetik -->
+    <script id="cv-bio-data" type="application/json">
+        {{ cv.bio_lines | default: empty | jsonify }}
+    </script>
+</div>

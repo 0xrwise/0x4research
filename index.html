@@ -1,0 +1,25 @@
+---
+layout: default
+---
+{% assign term_user = site.terminal.username | default: "user" %}
+{% assign term_host = site.terminal.hostname | default: "0x4research" %}
+
+<div class="ascii-art">
+<pre class="c-green">
+{{ site.terminal.ascii_banner | default: "0x4research" }}
+</pre>
+</div>
+
+<div class="intro-text">
+    <p class="c-white">{{ site.terminal.intro_title | default: "Welcome to 0x4research interactive shell." }}</p>
+    <p class="c-white">Type <span class="c-green">'help'</span> to see available commands.</p>
+</div>
+
+<div id="terminal-output" aria-live="polite"></div>
+
+<div class="terminal-input-line">
+    <span class="prompt">
+        <span class="c-red">{{ term_user }}</span><span class="c-white">@{{ term_host }}:~$</span>
+    </span>
+    <input type="text" id="cmd-input" autofocus autocomplete="off" spellcheck="false" aria-label="Terminal command input">
+</div>
